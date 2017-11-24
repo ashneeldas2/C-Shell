@@ -6,6 +6,19 @@
 #include <unistd.h>
 #include "shell.h"
 
+void trim(char * line) {
+    int i;
+    int front = 0;
+    int end = strlen(line) - 1;
+    while (line[front] == ' ')
+        front++;
+    while ((end >= front) && line[end] == ' ')
+        end--;
+    for (i = front; i <= end; i++)
+        line[i - front] = line[i];
+    line[i - front] = 0;
+}
+
 char ** parse_args(char* line){
     int i = 1; 
     char * temp = malloc(sizeof(char*)); 
@@ -14,14 +27,36 @@ char ** parse_args(char* line){
         strsep(&temp, " ");
         i++;
     } 
-    char** args = (char**) calloc(3, sizeof(char*));
+    char** args = (char**) calloc(i, sizeof(char*));
     int counter = 0;
     while(line){
-      args[counter] = strsep(&line, " ");
-      counter++;
+        args[counter] = strsep(&line, " ");
+        counter++;
     }
     return args;
 }  
+
+char ** separate_commands(char * line) {
+    int i = 1; 
+    char * temp = malloc(sizeof(char*)); 
+    strcpy(temp, line);
+    while (temp) {
+        strsep(&temp, ";");
+        i++;
+    } 
+    char** args = (char**) calloc(i, sizeof(char*));
+    int counter = 0;
+    while(line){
+        args[counter] = strsep(&line, ";");
+        counter++;
+    }
+    i = 0;
+    while (args[i]) {
+        trim(args[i]);
+        i++;
+    }
+    return args;
+}
 
 int execute(char ** args) {
     int f = fork();
@@ -44,7 +79,13 @@ int main() {
         if (line[len] == '\n') {
             line[len] = 0;
         }
-        char ** args = parse_args(line);
-        execute(args);
+        char ** args = separate_commands(line);
+        int i = 0; 
+        while (args[i]) {
+            printf("[%s]\n", args[i]);
+            char ** parsed = parse_args(args[i]);
+            execute(parsed);
+            i++;
+        }
     }
 }
