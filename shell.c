@@ -73,14 +73,14 @@ char ** separate_commands(char * line) {
 }
 
 int execute(char ** args) {
-    if (!strcmp(args[0], "cd")){
+    int f = fork();
+    if (!f && !strcmp(args[0], "cd")){
         return my_cd(args);
     }
-    if (!strcmp(args[0], "exit")){
+    else if (!f && !strcmp(args[0], "exit")){
         return my_exit(args);
     }
-    int f = fork();
-    if ( !f ) {
+    else if ( !f ) {
         execvp(args[0], args);
     }
     else {
