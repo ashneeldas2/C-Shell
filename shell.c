@@ -82,6 +82,7 @@ int execute(char ** args) {
     }
     else if ( !f ) {
         execvp(args[0], args);
+        exit(0);
     }
     else {
         int status;
