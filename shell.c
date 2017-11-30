@@ -29,7 +29,7 @@ int my_cd(char** args){
   }
 }
 
-int my_exit(char** args){
+int my_exit(){
   exit(0);
 }
 
@@ -74,11 +74,10 @@ char ** separate_commands(char * line) {
 
 int execute(char ** args) {
     int f = fork();
-    if (!f && !strcmp(args[0], "cd")){
+    if (f && !strcmp(args[0], "cd")){
+        int status;
+        wait(&status);
         return my_cd(args);
-    }
-    else if (!f && !strcmp(args[0], "exit")){
-        return my_exit(args);
     }
     else if ( !f ) {
         execvp(args[0], args);
@@ -103,6 +102,9 @@ int main() {
         char ** args = separate_commands(line);
         int i = 0;
         while (args[i]) {
+            if (!strcmp(args[i], "exit")) {
+                my_exit();
+            }
             printf("[%s]\n", args[i]);
             char ** parsed = parse_args(args[i]);
             execute(parsed);

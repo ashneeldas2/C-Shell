@@ -8,4 +8,4 @@ int execute(char ** args);
 
 int my_cd(char ** args);
 
-int my_exit(char ** args);
+int my_exit();
