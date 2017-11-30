@@ -4,6 +4,9 @@
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include "shell.h"
 
 void trim(char * line) {
