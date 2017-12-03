@@ -40,18 +40,18 @@ char ** parse_args(char* line){
   return args;
 }
 
-char ** separate_commands(char * line) {
+char ** separate_commands(char * line, char * delimeter) {
   int i = 1;
   char * temp = malloc(sizeof(char*));
   strcpy(temp, line);
   while (temp) {
-    strsep(&temp, ";");
+    strsep(&temp, delimeter);
     i++;
   }
   char** args = (char**) calloc(i, sizeof(char*));
   int counter = 0;
   while(line){
-    args[counter] = strsep(&line, ";");
+    args[counter] = strsep(&line, delimeter);
     counter++;
   }
   i = 0;

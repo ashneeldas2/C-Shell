@@ -21,7 +21,7 @@ int main() {
     if (line[len] == '\n') {
       line[len] = 0;
     }
-    char ** args = separate_commands(line);
+    char ** args = separate_commands(line, ";");
     int i = 0;
     while (args[i]) {
       if (!strcmp(args[i], "exit")) {
