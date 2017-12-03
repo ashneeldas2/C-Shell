@@ -18,52 +18,52 @@ placeholder
 ## Files & Function Headers
 
 ### parse.c
-1. char** parse_args()
-  * Inputs:
-  * Returns:
-  * Desc:
+  1. char** parse_args()
+    * Inputs:
+    * Returns:
+    * Desc:
 
-2. void trim()
-  * Inputs:
-  * Returns:
-  * Desc:
+  2. void trim()
+    * Inputs:
+    * Returns:
+    * Desc:
 
-3. char** separate_commands()
-  * Inputs:
-  * Returns:
-  * Desc:
+  3. char** separate_commands()
+    * Inputs:
+    * Returns:
+    * Desc:
 
 ### custom_commands.c
-1. int my_cd()
-  * Inputs:
-  * Returns:
-  * Desc:
+  1. int my_cd()
+    * Inputs:
+    * Returns:
+    * Desc:
 
-2. int my_exit()
-  * Inputs:
-  * Returns:
-  * Desc:
+  2. int my_exit()
+    * Inputs:
+    * Returns:
+    * Desc:
 
 ### shell.c
-1. int execute_reg()
-  * Inputs:
-  * Returns:
-  * Desc:
-2. int execute_all()
-  * Inputs:
-  * Returns:
-  * Desc:
-3. int redirect_out()
-  * Inputs:
-  * Returns:
-  * Desc:
-4. int redirect_in()
-  * Inputs:
-  * Returns:
-  * Desc:
+  1. int execute_reg()
+    * Inputs:
+    * Returns:
+    * Desc:
+  2. int execute_all()
+    * Inputs:
+    * Returns:
+    * Desc:
+  3. int redirect_out()
+    * Inputs:
+    * Returns:
+    * Desc:
+  4. int redirect_in()
+    * Inputs:
+    * Returns:
+    * Desc:
 
 ### main.c
-1. int main()
-  * Inputs:
-  * Returns:
-  * Desc:
+  1. int main()
+    * Inputs:
+    * Returns:
+    * Desc:
