@@ -1,0 +1,15 @@
+README.md
+custom_commands.c
+custom_commands.h
+custom_commands.o
+main.c
+main.o
+makefile
+parse.c
+parse.h
+parse.o
+shell
+shell.c
+shell.h
+shell.o
+test.txt

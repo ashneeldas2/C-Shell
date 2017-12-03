@@ -31,6 +31,7 @@ char ** parse_args(char* line){
     strsep(&temp, " ");
     i++;
   }
+
   char** args = (char**) calloc(i, sizeof(char*));
   int counter = 0;
   while(line){

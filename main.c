@@ -23,13 +23,20 @@ int main() {
     }
     char ** args = separate_commands(line, ";");
     int i = 0;
+    char ** parsed;
     while (args[i]) {
       if (!strcmp(args[i], "exit")) {
         return my_exit();
       }
-      printf("[%s]\n", args[i]);
-      char ** parsed = parse_args(args[i]);
-      execute(parsed);
+      if (strstr(args[i], ">")) {
+        parsed = separate_commands(args[i], ">");
+        redirect(parsed);
+        break;
+      }
+      else {
+        parsed = parse_args(args[i]);
+        execute(parsed);
+      }
       i++;
     }
   }

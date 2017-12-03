@@ -11,14 +11,16 @@
 #include "parse.h"
 #include "custom_commands.h"
 
-int redirect(char* line1, char* line2){
-  char** parsed1 = parse_args(line1);
-  char** parsed2 = parse_args(line2);
-  int fd = open(parsed2[0], O_CREAT|O_WRONLY, 0644);
-  int stdout = dup(STDOUT_FILENO);
-  dup2(fd, STDOUT_FILENO);
-  execute(parsed1);
-  return dup2(stdout, STDOUT_FILENO);
+int redirect(char ** args) {
+	int i = 0;
+	char ** parsed1 = parse_args(args[0]);
+	char ** parsed2 = parse_args(args[1]);
+	int fd = open(parsed2[0], O_CREAT|O_WRONLY, 0644);
+	int stdout = dup(STDOUT_FILENO);
+	int before = dup2(fd, STDOUT_FILENO);
+	execute(parsed1);
+	dup2(stdout, before);
+	return 1;
 }
 
 int execute(char ** args) {
