@@ -49,14 +49,17 @@ placeholder
       * Inputs:
       * Returns:
       * Desc:
+      
   2. ```int execute_all()```
       * Inputs:
       * Returns:
       * Desc:
+      
   3. ```int redirect_out()```
       * Inputs:
       * Returns:
       * Desc:
+      
   4. ```int redirect_in()```
       * Inputs:
       * Returns:
