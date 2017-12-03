@@ -18,19 +18,19 @@ placeholder
 
 ### parse.c
   1. ```char** parse_args()```
-      * Inputs:
-      * Returns:
-      * Desc:
+      * Inputs: This function takes in a char * (line).
+      * Returns: This function returns a char **
+      * Desc: This function takes in a char *, separates it by spaces, and returns a char ** that can be used in execvp(). 
 
   2. ```void trim()```
-      * Inputs:
-      * Returns:
-      * Desc:
+      * Inputs: This function takes in a char * (line).
+      * Returns: None
+      * Desc: This function removes leading and trailing white space in line. 
 
   3. ```char** separate_commands()```
-      * Inputs:
-      * Returns:
-      * Desc:
+      * Inputs: This function takes in a char * (line) and a char * (delimiter).
+      * Returns: This function returns a char **. 
+      * Desc: This function takes in a char *, separates it by a given delimiter, and returns a char ** that can be used in execvp(). 
 
 ### custom_commands.c
   1. ```int my_cd()```

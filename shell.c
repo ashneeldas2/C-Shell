@@ -32,6 +32,16 @@ int redirect_in(char ** args) {
 	dup2(stdin, before);
 	return 1;
 }
+int double_redir_out(char ** args) {
+	char ** parsed1 = separate_commands(args[0], ">");
+	char ** parsed2 = separate_commands(args[1], ">");
+	int fd = open(parsed2[0], O_CREAT|O_WRONLY|O_APPEND, 0644);
+	int stdout = dup(STDOUT_FILENO);
+	int before = dup2(fd, STDOUT_FILENO);
+	execute_reg(parsed1);
+	dup2(stdout, before);
+	return 1;
+}
 
 int piper(char ** args) {
 	char ** parsed1 = parse_args(args[0]);
@@ -61,6 +71,10 @@ int execute_all(char* args){
 	if (strstr(args, "|")) {
 		parsed = separate_commands(args, "|");
 		return piper(parsed);
+	}
+	if (strstr(args, ">>")) {
+		parsed = separate_commands(args, ">");
+		return double_redir_out(parsed);
 	}
 	else {
 		parsed = parse_args(args);
