@@ -10,8 +10,6 @@
 #include "shell.h"
 #include "parse.h"
 #include "custom_commands.h"
-#define OPEN 0
-#define CLOSED 1
 
 int redirect_out(char ** args) {
 	char ** parsed1 = parse_args(args[0]);
