@@ -1,11 +1,7 @@
-void trim(char * line);
-
-char ** parse_args(char * line);
-
-char ** separate_commands(char * line);
-
-int execute(char ** args);
-
-int my_cd(char ** args);
-
-int my_exit();
+#ifndef SHELL_H
+  #define SHELL_H
+  int execute(char ** args);
+  int my_cd(char ** args);
+  int redirect(char* line1, char* line2);
+  int my_exit();
+#endif

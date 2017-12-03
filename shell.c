@@ -8,27 +8,24 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include "shell.h"
+#include "parse.h"
 
-void trim(char * line) {
-    int i;
-    int front = 0;
-    int end = strlen(line) - 1;
-    while (line[front] == ' ')
-        front++;
-    while ((end >= front) && line[end] == ' ')
-        end--;
-    for (i = front; i <= end; i++)
-        line[i - front] = line[i];
-    line[i - front] = 0;
+int redirect(char* line1, char* line2){
+  char** parsed1 = parse_args(line1);
+  char** parsed2 = parse_args(line2);
+  int fd = open(parsed2[0], O_CREAT|O_WRONLY, 0644);
+  int stdout = dup(STDOUT_FILENO);
+  dup2(fd, STDOUT_FILENO);
+  execute(parsed1);
+  return dup2(stdout, STDOUT_FILENO);
 }
 
 int my_cd(char** args){
   if(chdir(args[1])){
-      strerror(errno);
-      return 0;
+    return 0;
   }
   else{
-      return 1;
+    return 1;
   }
 }
 
@@ -36,82 +33,21 @@ int my_exit(){
   exit(0);
 }
 
-char ** parse_args(char* line){
-    int i = 1;
-    char * temp = malloc(sizeof(char*));
-    strcpy(temp, line);
-    while (temp) {
-        strsep(&temp, " ");
-        i++;
-    }
-    char** args = (char**) calloc(i, sizeof(char*));
-    int counter = 0;
-    while(line){
-        args[counter] = strsep(&line, " ");
-        counter++;
-    }
-    return args;
-}
-
-char ** separate_commands(char * line) {
-    int i = 1;
-    char * temp = malloc(sizeof(char*));
-    strcpy(temp, line);
-    while (temp) {
-        strsep(&temp, ";");
-        i++;
-    }
-    char** args = (char**) calloc(i, sizeof(char*));
-    int counter = 0;
-    while(line){
-        args[counter] = strsep(&line, ";");
-        counter++;
-    }
-    i = 0;
-    while (args[i]) {
-        trim(args[i]);
-        i++;
-    }
-    return args;
-}
-
 int execute(char ** args) {
-    int f = fork();
-    if (f && !strcmp(args[0], "cd")){
-        int status;
-        wait(&status);
-        return my_cd(args);
-    }
-    else if ( !f ) {
-        execvp(args[0], args);
-        exit(0);
-    }
-    else {
-        int status;
-        wait(&status);
-    }
-    return 1;
-}
-
-int main() {
-    char line [100];
-    while (1) {
-        printf("Enter a command: ");
-        fgets(line, sizeof(line), stdin);
-        int len = strlen(line) - 1;
-        if (line[len] == '\n') {
-            line[len] = 0;
-        }
-        char ** args = separate_commands(line);
-        int i = 0;
-        while (args[i]) {
-            if (!strcmp(args[i], "exit")) {
-                my_exit();
-            }
-            printf("[%s]\n", args[i]);
-            char ** parsed = parse_args(args[i]);
-            execute(parsed);
-            i++;
-        }
-    }
+  int f = fork();
+  if (f && !strcmp(args[0], "cd")){
+    int status;
+    wait(&status);
+    return my_cd(args);
+  }
+  else if ( !f ) {
+    execvp(args[0], args);
+    printf("%s\n",strerror(errno));
+    exit(0);
+  }
+  else {
+    int status;
+    wait(&status);
+  }
+  return 1;
 }
