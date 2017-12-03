@@ -12,8 +12,7 @@
 placeholder
 
 ## Bugs
-1. Running C-SHELL from C-SHELL and exiting the second shell with "Ctrl-D" causes an infinite loop
-2. Using Quotes in a command (such as with ```git commit -m "message"``` causes an error)
+1. Using Quotes in a command (such as with ```git commit -m "message"``` causes an error)
 
 ## Files & Function Headers
 
@@ -22,7 +21,7 @@ placeholder
       * Inputs:
       * Returns:
       * Desc:
-  
+
   2. ```void trim()```
       * Inputs:
       * Returns:
@@ -49,17 +48,17 @@ placeholder
       * Inputs:
       * Returns:
       * Desc:
-      
+
   2. ```int execute_all()```
       * Inputs:
       * Returns:
       * Desc:
-      
+
   3. ```int redirect_out()```
       * Inputs:
       * Returns:
       * Desc:
-      
+
   4. ```int redirect_in()```
       * Inputs:
       * Returns:

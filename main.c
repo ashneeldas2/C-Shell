@@ -16,7 +16,10 @@ int main() {
   char line [100];
   while (1) {
     printf("Enter a command: ");
-    fgets(line, sizeof(line), stdin);
+    if(!fgets(line, sizeof(line), stdin)){
+      printf("exit\n");
+      return my_exit();
+    }
     int len = strlen(line) - 1;
     if (line[len] == '\n') {
       line[len] = 0;
@@ -28,4 +31,5 @@ int main() {
       i++;
     }
   }
+  return 0;
 }
