@@ -20,12 +20,14 @@ int main() {
       printf("exit\n");
       return my_exit();
     }
+    
     int len = strlen(line) - 1;
     if (line[len] == '\n') {
       line[len] = 0;
     }
     char ** args = separate_commands(line, ";");
     int i = 0;
+    printf("[%s] \n", line);
     while (args[i]) {
       execute_all(args[i]);
       i++;
