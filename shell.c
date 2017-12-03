@@ -9,6 +9,7 @@
 #include <sys/types.h>
 #include "shell.h"
 #include "parse.h"
+#include "custom_commands.h"
 
 int redirect(char* line1, char* line2){
   char** parsed1 = parse_args(line1);
@@ -18,19 +19,6 @@ int redirect(char* line1, char* line2){
   dup2(fd, STDOUT_FILENO);
   execute(parsed1);
   return dup2(stdout, STDOUT_FILENO);
-}
-
-int my_cd(char** args){
-  if(chdir(args[1])){
-    return 0;
-  }
-  else{
-    return 1;
-  }
-}
-
-int my_exit(){
-  exit(0);
 }
 
 int execute(char ** args) {

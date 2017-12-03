@@ -1,5 +1,6 @@
 #include "parse.h"
 #include "shell.h"
+#include "custom_commands.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -11,6 +12,7 @@
 #include <sys/types.h>
 
 int main() {
+  printf("\nWelcome To Ashneel And Anish's C-SHELL\n\n");
   char line [100];
   while (1) {
     printf("Enter a command: ");

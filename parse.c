@@ -8,6 +8,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include "parse.h"
+#include "custom_commands.h"
 
 void trim(char * line) {
   int i;
