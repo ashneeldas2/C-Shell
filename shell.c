@@ -10,6 +10,8 @@
 #include "shell.h"
 #include "parse.h"
 #include "custom_commands.h"
+#define OPEN 0
+#define CLOSED 1
 
 int redirect_out(char ** args) {
 	char ** parsed1 = parse_args(args[0]);
@@ -33,6 +35,18 @@ int redirect_in(char ** args) {
 	return 1;
 }
 
+int piper(char ** args) {
+	char ** parsed1 = parse_args(args[0]);
+	char ** parsed2 = parse_args(args[1]);
+	FILE *fp = popen(args[0],"r");
+	int stdin = dup(STDIN_FILENO);
+	int before = dup2(fileno(fp), STDIN_FILENO);
+	execute_reg(parsed2);
+	dup2(stdin, before);
+	pclose(fp);
+	return 1;
+}
+
 int execute_all(char* args){
 	char ** parsed;
 	if (!strcmp(args, "exit")) {
@@ -45,6 +59,10 @@ int execute_all(char* args){
 	if (strstr(args, "<")){
 		parsed = separate_commands(args, "<");
 		return redirect_in(parsed);
+	}
+	if (strstr(args, "|")) {
+		parsed = separate_commands(args, "|");
+		return piper(parsed);
 	}
 	else {
 		parsed = parse_args(args);
