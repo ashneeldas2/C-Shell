@@ -11,8 +11,7 @@
 #include "parse.h"
 #include "custom_commands.h"
 
-int redirect(char ** args) {
-	int i = 0;
+int redirect_out(char ** args) {
 	char ** parsed1 = parse_args(args[0]);
 	char ** parsed2 = parse_args(args[1]);
 	int fd = open(parsed2[0], O_CREAT|O_WRONLY, 0644);
@@ -23,6 +22,17 @@ int redirect(char ** args) {
 	return 1;
 }
 
+int redirect_in(char ** args) {
+	char ** parsed1 = parse_args(args[0]);
+	char ** parsed2 = parse_args(args[1]);
+	int fd = open(parsed2[0], O_CREAT|O_RDONLY, 0644);
+	int stdin = dup(STDIN_FILENO);
+	int before = dup2(fd, STDIN_FILENO);
+	execute_reg(parsed1);
+	dup2(stdin, before);
+	return 1;
+}
+
 int execute_all(char* args){
 	char ** parsed;
 	if (!strcmp(args, "exit")) {
@@ -30,7 +40,11 @@ int execute_all(char* args){
 	}
 	if (strstr(args, ">")) {
 		parsed = separate_commands(args, ">");
-		return redirect(parsed);
+		return redirect_out(parsed);
+	}
+	if (strstr(args, "<")){
+		parsed = separate_commands(args, "<");
+		return redirect_in(parsed);
 	}
 	else {
 		parsed = parse_args(args);
