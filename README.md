@@ -1,23 +1,23 @@
 # C-Shell - Ashneel Das and Anish Shenoy
-###Systems Project #01 Shelling Out Commands
+### Systems Project #01 Shelling Out Commands
 
-##Features
+## Features
 1. Forks and executes commands
 2. Run multiple commands on one line (seperated by ```;```)
 3. Built-In ```cd``` and ```exit``` commands
 4. Redirection using ```>``` and ```<```
 5. Use simple pipes with ```|```
 
-##Attempted Features
+## Attempted Features
 placeholder
 
-##Bugs
+## Bugs
 1. Running C-SHELL from C-SHELL and exiting the second shell with "Ctrl-D" causes an infinite loop
 2. Using Quotes in a command (such as with ```git commit -m "message"``` causes an error)
 
-##Files & Function Headers
+## Files & Function Headers
 
-###parse.c
+### parse.c
 1. char** parse_args()
   * Inputs:
   * Returns:
@@ -33,7 +33,7 @@ placeholder
   * Returns:
   * Desc:
 
-###custom_commands.c
+### custom_commands.c
 1. int my_cd()
   * Inputs:
   * Returns:
@@ -44,7 +44,7 @@ placeholder
   * Returns:
   * Desc:
 
-###shell.c
+### shell.c
 1. int execute_reg()
   * Inputs:
   * Returns:
@@ -62,7 +62,7 @@ placeholder
   * Returns:
   * Desc:
 
-###main.c
+### main.c
 1. int main()
   * Inputs:
   * Returns:
