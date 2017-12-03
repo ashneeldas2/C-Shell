@@ -4,4 +4,5 @@
   int redirect_out(char ** args);
   int redirect_in(char ** args);
   int execute_all(char * args);
+  int double_redir_out(char ** args);
 #endif
