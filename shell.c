@@ -18,12 +18,27 @@ int redirect(char ** args) {
 	int fd = open(parsed2[0], O_CREAT|O_WRONLY, 0644);
 	int stdout = dup(STDOUT_FILENO);
 	int before = dup2(fd, STDOUT_FILENO);
-	execute(parsed1);
+	execute_reg(parsed1);
 	dup2(stdout, before);
 	return 1;
 }
 
-int execute(char ** args) {
+int execute_all(char* args){
+	char ** parsed;
+	if (!strcmp(args, "exit")) {
+		return my_exit();
+	}
+	if (strstr(args, ">")) {
+		parsed = separate_commands(args, ">");
+		return redirect(parsed);
+	}
+	else {
+		parsed = parse_args(args);
+		return execute_reg(parsed);
+	}
+}
+
+int execute_reg(char ** args) {
   int f = fork();
   if (f && !strcmp(args[0], "cd")){
     int status;

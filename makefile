@@ -19,3 +19,4 @@ clean:
 
 run: all
 	./shell
+	make clean
