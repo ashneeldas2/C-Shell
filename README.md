@@ -7,6 +7,7 @@
 3. Built-In ```cd``` and ```exit``` commands
 4. Redirection using ```>``` and ```<```
 5. Use simple pipes with ```|```
+6. Redirection using ```>>```
 
 ## Attempted Features
 placeholder
@@ -57,13 +58,17 @@ placeholder
   3. ```int redirect_out()```
       * Inputs: A char **. 
       * Returns: 1 if successful.
-      * Desc: This function redirects the output of the first given command into the next. 
+      * Desc: This function redirects the output of the first given command into the named file. 
 
   4. ```int redirect_in()```
       * Inputs: A char **. 
       * Returns: 1 if successful. 
       * Desc: This function takes the output of the second command and makes it the input of the first. 
 
+   5. double_redir_out() 
+      * Inputs: A char **. 
+      * Returns: 1 if successful.
+      * Desc: This function redirects the output of the first given command into the named file and appends it. 
 ### main.c
   1. ```int main()```
       * Inputs: None
