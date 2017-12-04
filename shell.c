@@ -108,7 +108,7 @@ int execute_reg(char ** args) {
   }
   else if ( !f ) {
     execvp(args[0], args);
-    printf("%s\n",strerror(errno));
+    //printf("%s\n",strerror(errno));
     exit(0);
   }
   else {
