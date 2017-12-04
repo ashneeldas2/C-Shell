@@ -10,7 +10,7 @@
 6. Redirection using ```>>```
 
 ## Attempted Features
-1. Redirection using ```<<<``` 
+1. Redirection using ```<<``` 
 
 ## Bugs
 1. Using Quotes in a command (such as with ```git commit -m "message"``` causes an error)
@@ -70,7 +70,7 @@
       * Inputs: A char **. 
       * Returns: 1 if successful.
       * Desc: This function redirects the output of the first given command into the named file and appends it. 
-      
+
 ### main.c
   1. ```int main()```
       * Inputs: None
