@@ -32,6 +32,11 @@
       * Inputs: A char * (line) and a char * (delimiter).
       * Returns: A char **.
       * Desc: This function takes in a char *, separates it by a given delimiter, and returns a char ** that can be used in execvp().
+      
+  4. ```void reverse_string()```
+      * Inputs: A char * (str).
+      * Returns: None
+      * Desc: This function takes in a char *, and reverses it.
 
 ### custom_commands.c
   1. ```int my_cd()```
@@ -53,7 +58,7 @@
   2. ```int execute_all()```
       * Inputs: A char *.
       * Returns: 1 if successful.
-      * Desc: This function executes the given single command.
+      * Desc: This function executes the given single command. It searches the command for special characters (">", "<", etc...) to figure out the appropiate method of execution.
 
   3. ```int redirect_out()```
       * Inputs: A char **.
