@@ -38,10 +38,7 @@ int redirect_in(char ** args) {
 int double_redir_out(char ** args) {
 	char ** parsed1 = parse_args(args[0]);
 	char ** parsed2 = parse_args(++args[1]);
-	printf("parsed1[0]: %s\n", parsed1[0]);
-	printf("parsed2[0]: %s\n", parsed2[0]);
 	int fd = open(parsed2[0], O_CREAT|O_WRONLY|O_APPEND, 0644);
-	printf("%s\n", strerror(errno));
 	int stdout = dup(STDOUT_FILENO);
 	int before = dup2(fd, STDOUT_FILENO);
 	execute_reg(parsed1);
@@ -62,6 +59,7 @@ int piper(char ** args) {
 }
 
 int execute_all(char* args){
+	printf("[%s] \n", args);
 	char ** parsed;
 	if (!strcmp(args, "exit")) {
 		return my_exit();

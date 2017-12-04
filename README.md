@@ -10,7 +10,7 @@
 6. Redirection using ```>>```
 
 ## Attempted Features
-placeholder
+1. 
 
 ## Bugs
 1. Using Quotes in a command (such as with ```git commit -m "message"``` causes an error)
