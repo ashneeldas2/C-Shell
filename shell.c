@@ -15,7 +15,6 @@ int redirect_out(char ** args) {
 	//char ** parsed1 = parse_args(args[0]);
 	char ** parsed2 = parse_args(args[1]);
 	int fd = open(parsed2[0], O_CREAT|O_WRONLY, 0644);
-	printf("args[0]: %s\n", args[0]);
 	int stdout = dup(STDOUT_FILENO);
 	int before = dup2(fd, STDOUT_FILENO);
 	execute_all(args[0]);
@@ -59,7 +58,6 @@ int piper(char ** args) {
 }
 
 int execute_all(char* args){
-	printf("[%s] \n", args);
 	char ** parsed;
 	if (!strcmp(args, "exit")) {
 		return my_exit();
