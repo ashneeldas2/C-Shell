@@ -11,6 +11,7 @@
 #include "parse.h"
 #include "custom_commands.h"
 
+//Custom CD
 int my_cd(char** args){
   if(chdir(args[1])){
     return 0;
@@ -20,6 +21,7 @@ int my_cd(char** args){
   }
 }
 
+//Custom exit
 int my_exit(){
   exit(0);
 }

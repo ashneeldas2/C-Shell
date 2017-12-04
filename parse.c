@@ -10,6 +10,7 @@
 #include "parse.h"
 #include "custom_commands.h"
 
+//Removes Trailing and leading white space
 void trim(char * line) {
   int i;
   int front = 0;
@@ -23,6 +24,7 @@ void trim(char * line) {
   line[i - front] = 0;
 }
 
+//separates arguments based on spaces
 char ** parse_args(char* line){
   int i = 1;
   char * temp = malloc(sizeof(char*));
@@ -41,6 +43,7 @@ char ** parse_args(char* line){
   return args;
 }
 
+//seperates based on delimeter
 char ** separate_commands(char * line, char * delimeter) {
   int i = 1;
   char * temp = malloc(sizeof(char*));

@@ -11,6 +11,7 @@
 #include "parse.h"
 #include "custom_commands.h"
 
+//Redirects STDOUT
 int redirect_out(char ** args) {
 	//char ** parsed1 = parse_args(args[0]);
 	char ** parsed2 = parse_args(args[1]);
@@ -22,6 +23,7 @@ int redirect_out(char ** args) {
 	return 1;
 }
 
+//REDIRECTS STDIN
 int redirect_in(char ** args) {
 	//char ** parsed1 = parse_args(args[0]);
 	char ** parsed2 = parse_args(args[1]);
@@ -34,6 +36,7 @@ int redirect_in(char ** args) {
 	return 1;
 }
 
+//APPENDS STDOUT TO FILE
 int double_redir_out(char ** args) {
 	char ** parsed1 = parse_args(args[0]);
 	char ** parsed2 = parse_args(++args[1]);
@@ -45,6 +48,7 @@ int double_redir_out(char ** args) {
 	return 1;
 }
 
+//CREATES PIPE
 int piper(char ** args) {
 	char ** parsed1 = parse_args(args[0]);
 	char ** parsed2 = parse_args(args[1]);
@@ -57,6 +61,8 @@ int piper(char ** args) {
 	return 1;
 }
 
+//DETERMINES WHICH ROUTE TO TAKE
+//BUG: DEFAULTS TO > WHEN BOTH > AND < ARE PRESENT
 int execute_all(char* args){
 	char ** parsed;
 	if (!strcmp(args, "exit")) {
@@ -84,6 +90,7 @@ int execute_all(char* args){
 	}
 }
 
+//EXECUTES NORMALLY WITH EXECVP
 int execute_reg(char ** args) {
   int f = fork();
   if (f && !strcmp(args[0], "cd")){
