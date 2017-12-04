@@ -38,12 +38,12 @@ int redirect_in(char ** args) {
 
 //APPENDS STDOUT TO FILE
 int double_redir_out(char ** args) {
-	char ** parsed1 = parse_args(args[0]);
+	//char ** parsed1 = parse_args(args[0]);
 	char ** parsed2 = parse_args(++args[1]);
 	int fd = open(parsed2[0], O_CREAT|O_WRONLY|O_APPEND, 0644);
 	int stdout = dup(STDOUT_FILENO);
 	int before = dup2(fd, STDOUT_FILENO);
-	execute_reg(parsed1);
+	execute_all(args[0]);
 	dup2(stdout, before);
 	return 1;
 }
