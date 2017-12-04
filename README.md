@@ -3,14 +3,14 @@
 
 ## Features
 1. Forks and executes commands
-2. Run multiple commands on one line (seperated by ```;```)
+2. Run multiple commands on one line (separated by ```;```)
 3. Built-In ```cd``` and ```exit``` commands
 4. Redirection using ```>``` and ```<```
 5. Use simple pipes with ```|```
 6. Redirection using ```>>```
 
 ## Attempted Features
-1. Redirection using ```<<```
+1. Chaining together redirections (such as ```ls > 1.txt > 2.txt```)
 
 ## Bugs
 1. Using Quotes in a command (such as with ```git commit -m "message"``` causes an error)
