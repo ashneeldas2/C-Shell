@@ -65,6 +65,10 @@ int piper(char ** args) {
 //BUG: DEFAULTS TO > WHEN BOTH > AND < ARE PRESENT
 int execute_all(char* args){
 	char ** parsed;
+	char * temp = malloc(sizeof(char*));
+  strcpy(temp, args);
+	// Reverse to find last occurance of >
+	reverse_string(temp);
 	if (!strcmp(args, "exit")) {
 		return my_exit();
 	}
@@ -72,13 +76,17 @@ int execute_all(char* args){
 		parsed = separate_commands(args, ">");
 		return double_redir_out(parsed);
 	}
-	if (strstr(args, ">")) {
-		parsed = separate_commands(args, ">");
-		return redirect_out(parsed);
-	}
-	if (strstr(args, "<")){
-		parsed = separate_commands(args, "<");
-		return redirect_in(parsed);
+	int i = 0;
+	while(temp[i]){
+		if(temp[i] == '>'){
+			parsed = separate_commands(args, ">");
+			return redirect_out(parsed);
+		}
+		if(temp[i] == '<'){
+			parsed = separate_commands(args, "<");
+			return redirect_in(parsed);
+		}
+		i++;
 	}
 	if (strstr(args, "|")) {
 		parsed = separate_commands(args, "|");

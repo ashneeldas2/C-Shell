@@ -10,6 +10,24 @@
 #include "parse.h"
 #include "custom_commands.h"
 
+//REVERSE STRING
+void reverse_string(char* str) {
+    char temp;
+    int len = strlen(str) - 1;
+    int i;
+    int k = len;
+
+    for(i = 0; i < len; i++) {
+        temp = str[k];
+        str[k] = str[i];
+        str[i] = temp;
+        k--;
+        if(k == (len / 2)){
+            break;
+        }
+    }
+}
+
 //Removes Trailing and leading white space
 void trim(char * line) {
   int i;
