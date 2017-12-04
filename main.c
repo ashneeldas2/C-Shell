@@ -27,7 +27,6 @@ int main() {
     }
     char ** args = separate_commands(line, ";");
     int i = 0;
-    printf("[%s] \n", line);
     while (args[i]) {
       execute_all(args[i]);
       i++;
